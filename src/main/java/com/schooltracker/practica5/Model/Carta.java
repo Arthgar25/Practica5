@@ -23,6 +23,19 @@ public class Carta {
         this.description = description;
     }
 
+    public String getImageFileName(){
+        String prefix = (cardNumber != null && !cardNumber.isBlank())
+                ? cardNumber.trim()
+                : "";
+        String formattedName = (cardName != null ? cardName.trim() : "")
+                .replaceAll("\\s+", "_");
+
+        if (!prefix.isEmpty()) {
+            return prefix + "_" + formattedName + ".jpg";
+        }
+        return formattedName + ".jpg";
+    }
+
     public String getCardNumber() {
         return cardNumber;
     }

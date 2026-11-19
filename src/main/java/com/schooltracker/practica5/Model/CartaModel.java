@@ -12,7 +12,6 @@ public class CartaModel {
 
     public CartaModel(String csvFilePath) {
         this.allCards = new CircularList<>();
-        this.firstCardData = null;
         loadCardsFromCSV(csvFilePath);
     }
 
@@ -21,6 +20,7 @@ public class CartaModel {
             String line;
             boolean isFirstLine = true;
             boolean isFirstDataRow = true; // Flag to capture only the first member
+            int cardIndex = 1;
 
             while ((line = br.readLine()) != null) {
                 if (isFirstLine) {
@@ -36,6 +36,11 @@ public class CartaModel {
                         isFirstDataRow = false;
                     }
 
+                    String rawCardNumber = values[0].trim();
+                    String resolvedCardNumber = rawCardNumber.isEmpty()
+                            ? String.format("MP23-EN%03d", cardIndex)
+                            : rawCardNumber;
+
                     Carta card = new Carta(
                             values[0].trim(),
                             values[1].trim(),
@@ -48,6 +53,7 @@ public class CartaModel {
                             values[8].trim()
                     );
                     allCards.addLast(card);
+                    cardIndex++;
                 }
             }
         } catch (IOException e) {
