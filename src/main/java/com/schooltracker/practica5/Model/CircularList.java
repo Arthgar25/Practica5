@@ -1,4 +1,5 @@
 package com.schooltracker.practica5.Model;
+
 public class CircularList<T> {
     private Node<T> tail;
     private int size;
@@ -14,6 +15,23 @@ public class CircularList<T> {
 
     public int size() {
         return size;
+    }
+
+    // Added getter for tail
+    public Node<T> getTail() {
+        return tail;
+    }
+
+    // Added getter by index
+    public T get(int index) {
+        if (index < 0 || index >= size || isEmpty()) {
+            return null;
+        }
+        Node<T> current = tail.getNext();
+        for (int i = 0; i < index; i++) {
+            current = current.getNext();
+        }
+        return current.getData();
     }
 
     public void addFirst(T data) {
