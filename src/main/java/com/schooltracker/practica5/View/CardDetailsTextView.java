@@ -46,14 +46,7 @@ public class CardDetailsTextView extends VBox {
         counterLabel = new Label();
         metaStatsRow = new HBox(8);
         metaStatsRow.setAlignment(Pos.CENTER_LEFT);
-        metaStatsRow.getChildren().addAll(
-                attributeLabel, sep1Label,
-                levelRankLabel, sep2Label,
-                raceSubtypeLabel, spacer,
-                atkLabel, sep3Label,
-                defLabel, sep4Label,
-                counterLabel
-        );
+        metaStatsRow.getChildren().addAll(attributeLabel, sep1Label, levelRankLabel, sep2Label, raceSubtypeLabel, spacer, atkLabel, sep3Label, defLabel, sep4Label, counterLabel);
 
         descriptionLabel = new Label();
         descriptionLabel.setWrapText(true);
