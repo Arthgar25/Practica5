@@ -28,5 +28,50 @@ public class CardDetailsTextView extends VBox {
     private Label rarityBadgeLabel;
 
     public CardDetailsTextView() {
+        setSpacing(10);
+        setPadding(new Insets(16, 20, 16, 20));
+
+        titleLabel = new Label();
+        attributeLabel = new Label();
+        sep1Label = createSeparator();
+        levelRankLabel = new Label();
+        sep2Label = createSeparator();
+        raceSubtypeLabel = new Label();
+        spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        atkLabel = new Label();
+        sep3Label = createSeparator();
+        defLabel = new Label();
+        sep4Label = createSeparator();
+        counterLabel = new Label();
+        metaStatsRow = new HBox(8);
+        metaStatsRow.setAlignment(Pos.CENTER_LEFT);
+        metaStatsRow.getChildren().addAll(
+                attributeLabel, sep1Label,
+                levelRankLabel, sep2Label,
+                raceSubtypeLabel, spacer,
+                atkLabel, sep3Label,
+                defLabel, sep4Label,
+                counterLabel
+        );
+
+        descriptionLabel = new Label();
+        descriptionLabel.setWrapText(true);
+
+        bottomSpacer = new Region();
+        HBox.setHgrow(bottomSpacer, Priority.ALWAYS);
+
+        rarityBadgeLabel = new Label();
+
+        bottomRow = new HBox();
+        bottomRow.setAlignment(Pos.CENTER_RIGHT);
+        bottomRow.getChildren().addAll(bottomSpacer, rarityBadgeLabel);
+
+        getChildren().addAll(titleLabel, metaStatsRow, descriptionLabel, bottomRow);
+    }
+
+    private Label createSeparator() {
+        Label sep = new Label("|");
+        return sep;
     }
 }
