@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CartaModel {
     private CircularList<Carta> allCards;
-    private String[] firstCardData; // Array to store info from the first member of the CSV
+    private String[] firstCardData;
 
     public CartaModel(String csvFilePath) {
         this.allCards = new CircularList<>();
@@ -19,18 +19,17 @@ public class CartaModel {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             boolean isFirstLine = true;
-            boolean isFirstDataRow = true; // Flag to capture only the first member
+            boolean isFirstDataRow = true;
             int cardIndex = 1;
 
             while ((line = br.readLine()) != null) {
                 if (isFirstLine) {
                     isFirstLine = false;
-                    continue; // Skip the CSV header row
+                    continue;
                 }
 
                 String[] values = parseCsvLine(line);
                 if (values.length >= 9) {
-                    // Capture the first valid data row into the String array
                     if (isFirstDataRow) {
                         this.firstCardData = values;
                         isFirstDataRow = false;
@@ -42,7 +41,7 @@ public class CartaModel {
                             : rawCardNumber;
 
                     Carta card = new Carta(
-                            values[0].trim(),
+                            resolvedCardNumber, // FIXED: use resolvedCardNumber instead of values[0].trim()
                             values[1].trim(),
                             values[2].trim(),
                             values[3].trim(),
@@ -61,7 +60,6 @@ public class CartaModel {
         }
     }
 
-    // Getter to retrieve the first member's info as a String array
     public String[] getFirstCardData() {
         return firstCardData;
     }
@@ -128,7 +126,10 @@ public class CartaModel {
             Node<Carta> current = allCards.getTail().getNext();
             Node<Carta> start = current;
             do {
-                tempList.add(current.getData());
+                Carta card = current.getData();
+                if (isMonsterWithStat(card, card.getAttack())) {
+                    tempList.add(card);
+                }
                 current = current.getNext();
             } while (current != start);
         }
@@ -152,7 +153,10 @@ public class CartaModel {
             Node<Carta> current = allCards.getTail().getNext();
             Node<Carta> start = current;
             do {
-                tempList.add(current.getData());
+                Carta card = current.getData();
+                if (isMonsterWithStat(card, card.getDefense())) {
+                    tempList.add(card);
+                }
                 current = current.getNext();
             } while (current != start);
         }
@@ -168,6 +172,21 @@ public class CartaModel {
             result.addLast(card);
         }
         return result;
+    }
+
+    private boolean isMonsterWithStat(Carta card, String stat) {
+        if (card == null) {
+            return false;
+        }
+        String attr = card.getAttributeType() != null ? card.getAttributeType().trim().toUpperCase() : "";
+        if (attr.contains("SPELL") || attr.contains("TRAP")) {
+            return false;
+        }
+        if (stat == null) {
+            return false;
+        }
+        String digits = stat.replaceAll("[^0-9]", "");
+        return !digits.isEmpty();
     }
 
     private int parseStat(String stat) {
