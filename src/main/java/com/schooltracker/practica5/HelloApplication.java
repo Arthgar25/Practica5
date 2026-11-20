@@ -20,7 +20,6 @@ public class HelloApplication extends Application {
             throw new IOException("Could not find MP23_Dueling_Heroes_Cards.csv in resources.");
         }
 
-        // FIXED: Safely convert resource URL to a proper file path string on all OSs
         String filePath;
         try {
             filePath = Paths.get(resource.toURI()).toString();
