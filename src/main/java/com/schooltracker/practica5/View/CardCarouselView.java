@@ -14,7 +14,6 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Bounds;
 
-
 public class CardCarouselView extends HBox {
     public enum SlideDirection{
         LEFT,
@@ -56,7 +55,6 @@ public class CardCarouselView extends HBox {
         centerSlot = new StackPane(centerImageView);
         rightSlot = new StackPane(rightImageView);
 
-        // Left and right thumbnails are clickable; center active card is non-clickable
         leftSlot.setCursor(Cursor.HAND);
         rightSlot.setCursor(Cursor.HAND);
         centerSlot.setCursor(Cursor.DEFAULT);
