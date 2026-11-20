@@ -121,6 +121,7 @@ public class CartaModel {
     }
 
     public CircularList<Carta> showByAttackPoints(boolean lowToHigh) {
+//        CircularList<Carta> result = new CircularList<>();
         List<Carta> tempList = new ArrayList<>();
         if (!allCards.isEmpty()) {
             Node<Carta> current = allCards.getTail().getNext();
@@ -133,6 +134,34 @@ public class CartaModel {
                 current = current.getNext();
             } while (current != start);
         }
+
+//        int size = result.size();
+//        if (size > 1) {
+//            for (int i = 0; i < size - 1; i++) {
+//                Node<Carta> current = result.getTail().getNext();
+//                boolean swapped = false;
+//
+//                for (int j = 0; j < size - 1 - i; j++) {
+//                    Node<Carta> next = current.getNext();
+//                    int atk1 = parseStat(current.getData().getAttack());
+//                    int atk2 = parseStat(next.getData().getAttack());
+//
+//                    boolean shouldSwap = lowToHigh ? (atk1 > atk2) : (atk1 < atk2);
+//                    if (shouldSwap) {
+//                        Carta temp = current.getData();
+//                        current.setData(next.getData());
+//                        next.setData(temp);
+//                        swapped = true;
+//                    }
+//
+//                    current = next;
+//                }
+//
+//                if (!swapped) {
+//                    break;
+//                }
+//            }
+//        }
 
         tempList.sort((c1, c2) -> {
             int atk1 = parseStat(c1.getAttack());
@@ -148,6 +177,7 @@ public class CartaModel {
     }
 
     public CircularList<Carta> showByDefensePoints(boolean lowToHigh) {
+//        CircularList<Carta> result = new CircularList<>();
         List<Carta> tempList = new ArrayList<>();
         if (!allCards.isEmpty()) {
             Node<Carta> current = allCards.getTail().getNext();
@@ -160,7 +190,33 @@ public class CartaModel {
                 current = current.getNext();
             } while (current != start);
         }
-
+//        int size = result.size();
+//        if (size > 1) {
+//            for (int i = 0; i < size - 1; i++) {
+//                Node<Carta> current = result.getTail().getNext();
+//                boolean swapped = false;
+//
+//                for (int j = 0; j < size - 1 - i; j++) {
+//                    Node<Carta> next = current.getNext();
+//                    int def1 = parseStat(current.getData().getDefense());
+//                    int def2 = parseStat(next.getData().getDefense());
+//
+//                    boolean shouldSwap = lowToHigh ? (def1 > def2) : (def1 < def2);
+//                    if (shouldSwap) {
+//                        Carta temp = current.getData();
+//                        current.setData(next.getData());
+//                        next.setData(temp);
+//                        swapped = true;
+//                    }
+//
+//                    current = next;
+//                }
+//
+//                if (!swapped) {
+//                    break;
+//                }
+//            }
+//        }
         tempList.sort((c1, c2) -> {
             int def1 = parseStat(c1.getDefense());
             int def2 = parseStat(c2.getDefense());
