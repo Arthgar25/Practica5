@@ -41,7 +41,7 @@ public class SideBar extends VBox {
         };
         this.levelComboBox = new ComboBox<>();
         this.levelComboBox.setPromptText("Choose level");
-        this.levelComboBox.getItems().setAll(CardLevel.values());
+//        this.levelComboBox.getItems().setAll(CardLevel.values());
         this.levelComboBox.setMaxWidth(Double.MAX_VALUE);
 
         this.showByAttribute = new QuickButton("Show by attribute") {
@@ -52,7 +52,7 @@ public class SideBar extends VBox {
         };
         this.attributeComboBox = new ComboBox<>();
         this.attributeComboBox.setPromptText("Choose attribute");
-        this.attributeComboBox.getItems().setAll(Attribute.values());
+//        this.attributeComboBox.getItems().setAll(Attribute.values());
         this.attributeComboBox.setMaxWidth(Double.MAX_VALUE);
 
         this.showByAttackPoints = new QuickButton("Show by attack points") {
