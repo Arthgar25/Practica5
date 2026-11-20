@@ -1,5 +1,7 @@
 package com.schooltracker.practica5.View;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -8,9 +10,9 @@ import javafx.scene.layout.VBox;
 public class SideBar extends VBox {
     private final QuickButton showAllCards;
     private final QuickButton showByLevel;
-    private final ComboBox<String> levelComboBox;
+    private final ComboBox<CardLevel> levelComboBox;
     private final QuickButton showByAttribute;
-    private final ComboBox<String> attributeComboBox;
+    private final ComboBox<Attribute> attributeComboBox;
     private final QuickButton showByAttackPoints;
     private final CheckBox attackSortCheckBox;
     private final QuickButton showByDefensePoints;
@@ -18,7 +20,7 @@ public class SideBar extends VBox {
 
     public SideBar() {
         double sidebarWidth = 220.0;
-        this.setPrefWidth(Double.valueOf(sidebarWidth));
+        this.setPrefWidth(sidebarWidth);
         this.setAlignment(Pos.TOP_LEFT);
         this.setSpacing(15);
         this.setStyle("-fx-background-color: #252526;" +
@@ -29,36 +31,32 @@ public class SideBar extends VBox {
         this.showAllCards = new QuickButton("Show all cards") {
             @Override
             protected void addAction() {
-
             }
         };
 
         this.showByLevel = new QuickButton("Show by level") {
             @Override
             protected void addAction() {
-
             }
         };
         this.levelComboBox = new ComboBox<>();
         this.levelComboBox.setPromptText("Choose level");
-//        this.levelComboBox.getItems().setAll(CardLevel.values());
+        this.levelComboBox.getItems().setAll(CardLevel.values());
         this.levelComboBox.setMaxWidth(Double.MAX_VALUE);
 
         this.showByAttribute = new QuickButton("Show by attribute") {
             @Override
             protected void addAction() {
-
             }
         };
         this.attributeComboBox = new ComboBox<>();
         this.attributeComboBox.setPromptText("Choose attribute");
-//        this.attributeComboBox.getItems().setAll(Attribute.values());
+        this.attributeComboBox.getItems().setAll(Attribute.values());
         this.attributeComboBox.setMaxWidth(Double.MAX_VALUE);
 
         this.showByAttackPoints = new QuickButton("Show by attack points") {
             @Override
             protected void addAction() {
-
             }
         };
         this.attackSortCheckBox = new CheckBox("Low to high");
@@ -67,7 +65,6 @@ public class SideBar extends VBox {
         this.showByDefensePoints = new QuickButton("Show by defense points") {
             @Override
             protected void addAction() {
-
             }
         };
         this.defenseSortCheckBox = new CheckBox("Low to high");
@@ -86,6 +83,8 @@ public class SideBar extends VBox {
                 defenseBox
         );
     }
+
+    // --- Button Getters ---
 
     public QuickButton getShowAllCardsButton() {
         return showAllCards;
@@ -107,4 +106,59 @@ public class SideBar extends VBox {
         return showByDefensePoints;
     }
 
+    // --- Action Setters (JavaFX EventHandler) ---
+
+    public void setShowAllCardsAction(EventHandler<ActionEvent> handler) {
+        showAllCards.setOnAction(handler);
+    }
+
+    public void setShowByLevelAction(EventHandler<ActionEvent> handler) {
+        showByLevel.setOnAction(handler);
+    }
+
+    public void setShowByAttributeAction(EventHandler<ActionEvent> handler) {
+        showByAttribute.setOnAction(handler);
+    }
+
+    public void setShowByAttackPointsAction(EventHandler<ActionEvent> handler) {
+        showByAttackPoints.setOnAction(handler);
+    }
+
+    public void setShowByDefensePointsAction(EventHandler<ActionEvent> handler) {
+        showByDefensePoints.setOnAction(handler);
+    }
+
+    // --- Selection & Sort State Getters/Setters ---
+
+    public CardLevel getSelectedLevel() {
+        return levelComboBox.getValue();
+    }
+
+    public void setSelectedLevel(CardLevel level) {
+        levelComboBox.setValue(level);
+    }
+
+    public Attribute getSelectedAttribute() {
+        return attributeComboBox.getValue();
+    }
+
+    public void setSelectedAttribute(Attribute attribute) {
+        attributeComboBox.setValue(attribute);
+    }
+
+    public boolean isAttackLowToHigh() {
+        return attackSortCheckBox.isSelected();
+    }
+
+    public void setAttackLowToHigh(boolean lowToHigh) {
+        attackSortCheckBox.setSelected(lowToHigh);
+    }
+
+    public boolean isDefenseLowToHigh() {
+        return defenseSortCheckBox.isSelected();
+    }
+
+    public void setDefenseLowToHigh(boolean lowToHigh) {
+        defenseSortCheckBox.setSelected(lowToHigh);
+    }
 }

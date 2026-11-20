@@ -17,12 +17,10 @@ public class CircularList<T> {
         return size;
     }
 
-    // Added getter for tail
     public Node<T> getTail() {
         return tail;
     }
 
-    // Added getter by index
     public T get(int index) {
         if (index < 0 || index >= size || isEmpty()) {
             return null;
